@@ -6,23 +6,22 @@ import Logo from "./Logo";
  * Logo bovenin in de lucht, knoppen onderin op de donkere waterspiegeling,
  * zodat niets over de gloed achter de toren valt.
  *
- * Beeld: /public/hero/skyline.webp — vervang door een hogere resolutie (min. 2560 px breed)
- * zodra die er is.
+ * Beeld: /public/hero/skyline.webp
+ * Sterkte van het beeld: blur-[3px] (vaagheid) en opacity-60 (aanwezigheid).
  */
 export default function Hero() {
   return (
     <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-[#0d0e12] text-kalk">
-      {/* beeld begint onder het logo, zodat de torenspits nooit achter de tekst valt */}
-      <div className="absolute inset-x-0 bottom-0 top-[30%] -z-10 sm:top-[18%]">
+      {/* beeld begint onder het logo en loopt bovenin zacht over in de lucht */}
+      <div className="absolute inset-x-0 bottom-0 top-[30%] -z-10 [mask-image:linear-gradient(to_bottom,transparent,black_30%)] sm:top-[18%]">
         <Image
           src="/hero/skyline.webp"
           alt="Skyline van Groningen met de Martinitoren"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[58%_100%] md:object-bottom"
+          className="scale-[1.04] object-cover object-[58%_100%] opacity-60 blur-[3px] brightness-90 contrast-[.85] md:object-bottom"
         />
-        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#0d0e12] to-transparent" />
       </div>
       {/* zachte overgang bovenin (achter de header) en onderin (voor de knoppen) */}
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-[#0d0e12] to-transparent" />
