@@ -1,50 +1,55 @@
+import Image from "next/image";
 import Logo from "./Logo";
-import Skyline from "./Skyline";
 
+/**
+ * Hero met eigen Groningen-skyline (Martinitoren in het midden).
+ * Logo bovenin in de lucht, knoppen onderin op de donkere waterspiegeling,
+ * zodat niets over de gloed achter de toren valt.
+ *
+ * Beeld: /public/hero/skyline.webp — vervang door een hogere resolutie (min. 2560 px breed)
+ * zodra die er is.
+ */
 export default function Hero() {
   return (
-    <section className="grain relative isolate flex min-h-[100svh] items-center overflow-hidden bg-nacht text-kalk">
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 35%, rgba(236,232,223,0.10), transparent 70%), radial-gradient(circle at 78% 30%, rgba(236,232,223,0.05), transparent 35%), linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%)",
-        }}
-      />
-      <Skyline className="pointer-events-none absolute bottom-0 left-1/2 h-[66%] w-auto max-w-none -translate-x-[66.67%] md:h-[84%] md:-translate-x-1/2" />
+    <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-[#0d0e12] text-kalk">
+      {/* beeld begint onder het logo, zodat de torenspits nooit achter de tekst valt */}
+      <div className="absolute inset-x-0 bottom-0 top-[30%] -z-10 sm:top-[18%]">
+        <Image
+          src="/hero/skyline.webp"
+          alt="Skyline van Groningen met de Martinitoren"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[58%_100%] md:object-bottom"
+        />
+        <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#0d0e12] to-transparent" />
+      </div>
+      {/* zachte overgang bovenin (achter de header) en onderin (voor de knoppen) */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-[#0d0e12] to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-t from-black/70 to-transparent" />
 
-      <div className="container-x relative flex flex-col items-center pb-24 pt-32 text-center">
-        <p className="eyebrow animate-rise text-kalk/60">Collectie 01 · Najaar 2026</p>
+      <div className="container-x relative flex flex-col items-center pt-24 text-center sm:pt-28">
+        <p className="eyebrow animate-rise text-[10px] text-kalk/55 sm:text-[11px]">Collectie 01 · Najaar 2026</p>
 
-        <h1 className="mt-8 animate-rise [animation-delay:120ms]">
+        <h1 className="mt-5 animate-rise [animation-delay:120ms]">
           <Logo size="xl" />
         </h1>
 
-        <p className="eyebrow mt-8 animate-rise text-kalk/80 [animation-delay:240ms] sm:text-[12px]">
+        <p className="eyebrow mt-5 animate-rise text-[10px] text-kalk/75 [animation-delay:240ms] sm:text-[12px]">
           Streetwear from the North
         </p>
+      </div>
 
-        <p className="mt-6 max-w-md animate-rise text-[15px] leading-relaxed text-kalk/65 [animation-delay:360ms]">
-          Premium casualwear met een Groningse identiteit. Herkenbaar voor wie het weet, stijlvol voor iedereen.
-        </p>
-
-        <div className="mt-10 flex w-full animate-rise flex-col gap-3 [animation-delay:480ms] sm:w-auto sm:flex-row">
-          <a href="#collectie" className="btn-light">
+      <div className="container-x relative mt-auto flex justify-center pb-8 sm:pb-12">
+        <div className="flex animate-rise gap-3 [animation-delay:400ms]">
+          <a href="#collectie" className="btn-light whitespace-nowrap px-4 py-3.5 text-[10.5px] tracking-[0.18em] sm:px-7 sm:py-4 sm:text-[12px] sm:tracking-[0.24em]">
             Bekijk de collectie
           </a>
-          <a href="#verhaal" className="btn-ghost">
+          <a href="#verhaal" className="btn-ghost whitespace-nowrap px-4 py-3.5 text-[10.5px] tracking-[0.18em] backdrop-blur-[2px] sm:px-7 sm:py-4 sm:text-[12px] sm:tracking-[0.24em]">
             Ons verhaal
           </a>
         </div>
       </div>
-
-      <a
-        href="#collectie"
-        className="eyebrow absolute bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-kalk/40 transition hover:text-kalk/80"
-      >
-        Scroll
-        <span className="mx-auto mt-3 block h-8 w-px bg-kalk/30" />
-      </a>
     </section>
   );
 }
